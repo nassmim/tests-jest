@@ -3,11 +3,12 @@ import ErrorPage from "./ErrorPage.js"
 import LoadingPage from "./LoadingPage.js"
 
 import Actions from './Actions.js'
+import { orderData } from '../app/generic.js'
 
 const row = (bill) => {
   return (`
     <tr>
-      <td>${bill.type}</td>
+      <td>${bill.type}</td> 
       <td>${bill.name}</td>
       <td>${bill.date}</td>
       <td>${bill.amount} €</td>
@@ -19,8 +20,13 @@ const row = (bill) => {
     `)
   }
 
+
 const rows = (data) => {
-  return (data && data.length) ? data.map(bill => row(bill)).join("") : ""
+    
+    if(!data || !data.length) return ""
+
+    const orderedBills = orderData({ data })
+    return orderedBills.map(bill => row(bill)).join("")
 }
 
 export default ({ data: bills, loading, error }) => {
