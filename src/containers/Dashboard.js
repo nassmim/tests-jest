@@ -95,10 +95,12 @@ export default class {
         $(`#open-bill${b.id}`).css({ background: '#0D5AE5' })
       })
       $(`#open-bill${billId}`).css({ background: '#2A2B35' })
+      // CORRECTION
       if(this.previousBillId && this.previousBillId !== billId) $(`#open-bill${this.previousBillId}`).css({ background: '#0D5AE5' })
       $('.dashboard-right-container div').html(DashboardFormUI(bill))
       $('.vertical-navbar').css({ height: '150vh' })
-      this.previousBillId = billId
+      // CORRECTION
+      this.previousBillId = billId 
       this.counter ++
     } else {
       $(`#open-bill${billId}`).css({ background: '#0D5AE5' })
@@ -139,12 +141,13 @@ export default class {
     if (this.index === undefined || this.index !== index) this.index = index
     if (this.counter % 2 === 0) {
       $(`#arrow-icon${this.index}`).css({ transform: 'rotate(0deg)'})
-      const filteredListOfBills = filteredBills(bills, getStatus(this.index))
+      const filteredListOfBills = filteredBills(bills, getStatus(this.index)) // CORRECTION
       $(`#status-bills-container${this.index}`)
         .html(cards(filteredListOfBills))
+    
       filteredListOfBills.forEach(bill => {
         $(`#open-bill${bill.id}`).on('click', (e) => this.handleEditTicket(e, bill, filteredListOfBills))
-      })        
+      }) // CORRECTION
       this.counter ++
     } else {
       $(`#arrow-icon${this.index}`).css({ transform: 'rotate(90deg)'})

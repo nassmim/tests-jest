@@ -25,6 +25,8 @@ const rows = (data) => {
     
     if(!data || !data.length) return ""
 
+    // CORRECTION
+    // La liste de factures est triée de la plus récente à la plus ancienne
     const orderedBills = orderData({ data })
     return orderedBills.map(bill => row(bill)).join("")
 }

@@ -21,6 +21,7 @@ export default class NewBill {
     const inputElement = this.document.querySelector(`input[data-testid="file"]`)
     const file = inputElement.files[0]
 
+    // CORRECTION
     if(!file) return 
 
     const fileExtensionIsAccepted = file.name.match(/\.png|\.jpg|\.jpeg$/)

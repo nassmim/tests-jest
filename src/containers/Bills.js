@@ -17,6 +17,7 @@ export default class {
   }
 
   handleClickNewBill = () => {
+    console.log('test ran')
     this.onNavigate(ROUTES_PATH['NewBill'])
   }
 
