@@ -17,7 +17,6 @@ export default class {
   }
 
   handleClickNewBill = () => {
-    console.log('test ran')
     this.onNavigate(ROUTES_PATH['NewBill'])
   }
 
@@ -25,7 +24,8 @@ export default class {
     const billUrl = icon.getAttribute("data-bill-url")
     const imgWidth = Math.floor($('#modaleFile').width() * 0.5)
     $('#modaleFile').find(".modal-body").html(`<div style='text-align: center;' class="bill-proof-container"><img width=${imgWidth} src=${billUrl} alt="Bill" /></div>`)
-    $('#modaleFile').modal('show')
+    // CORRECTION
+    if (typeof $('#modaleFile').modal === 'function') $('#modaleFile').modal('show')
   }
 
   getBills = () => {

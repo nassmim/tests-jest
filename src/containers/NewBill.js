@@ -2,6 +2,7 @@ import { ROUTES_PATH } from '../constants/routes.js'
 import Logout from "./Logout.js"
 
 export default class NewBill {
+    
   constructor({ document, onNavigate, store, localStorage }) {
     this.document = document
     this.onNavigate = onNavigate
@@ -17,7 +18,6 @@ export default class NewBill {
   }
   handleChangeFile = e => {
     e.preventDefault()
-
     const inputElement = this.document.querySelector(`input[data-testid="file"]`)
     const file = inputElement.files[0]
 
@@ -50,7 +50,7 @@ export default class NewBill {
         this.billId = key
         this.fileUrl = fileUrl
         this.fileName = fileName
-      }).catch(error => console.error(error))
+      }).catch(error =>  {console.log('dans catch')})
   }
   handleSubmit = e => {
     e.preventDefault()
