@@ -110,11 +110,12 @@ describe("Given I am connected as an employee", () => {
 
         test("fetches bills from mock API GET", async () => {
 
-            document.body.innerHTML = BillsUI({ data: bills})
             const billsClass = new Bills({ document, onNavigate, store: mockStore, localStorage })            
             getBills = jest.fn(() => billsClass.getBills())
             const billsFetched = await getBills()
-            expect(billsFetched).toBeTruthy()
+            document.body.innerHTML = BillsUI({ data: billsFetched})
+            const iconsEye = screen.queryAllByTestId('icon-eye')
+            expect(iconsEye.length).toEqual(billsFetched.length)
         })
    
         describe("When corrupted data in introduced in the bills fetched", () => {
