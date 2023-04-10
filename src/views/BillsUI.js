@@ -3,11 +3,12 @@ import ErrorPage from "./ErrorPage.js"
 import LoadingPage from "./LoadingPage.js"
 
 import Actions from './Actions.js'
+import { orderData } from '../app/generic.js'
 
 const row = (bill) => {
   return (`
     <tr>
-      <td>${bill.type}</td>
+      <td>${bill.type}</td> 
       <td>${bill.name}</td>
       <td>${bill.date}</td>
       <td>${bill.amount} €</td>
@@ -19,14 +20,22 @@ const row = (bill) => {
     `)
   }
 
+
 const rows = (data) => {
-  return (data && data.length) ? data.map(bill => row(bill)).join("") : ""
+    
+    if(!data || !data.length) return ""
+
+    // CORRECTION
+    // La liste de factures est triée de la plus récente à la plus ancienne
+    const orderedBills = orderData({ data })
+    return orderedBills.map(bill => row(bill)).join("")
 }
 
 export default ({ data: bills, loading, error }) => {
   
+// CORRECTION
   const modal = () => (`
-    <div class="modal fade" id="modaleFile" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="modaleFile" data-testid="modaleFile" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
       <div class="modal-dialog modal-dialog-centered modal-lg" role="document">
         <div class="modal-content">
           <div class="modal-header">
