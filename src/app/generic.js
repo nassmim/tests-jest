@@ -14,10 +14,19 @@
 */
 const orderData = ({ data, ascending=true}) => {
 
-    const ascendingValue = ascending ? 1 : -1
-    const antiChrono = (a, b) => ( ascendingValue * ((a.date < b.date) ? 1 : -1) )
+    const data_dates_converted = data.map(item => {
+        return {...item, date_format: new Date(item.date)}
+    })
     
-    const dataOrdered = [...data].sort(antiChrono)
+    const ascendingValue = ascending ? 1 : -1
+    const antiChrono = (a, b) => ( ascendingValue * ((a.date_format < b.date_format) ? 1 : -1) )
+    
+    let dataOrdered = [...data_dates_converted].sort(antiChrono)
+    dataOrdered = dataOrdered.map(item => {
+        delete item.date_format
+        return item
+    })
+    
     return dataOrdered
 }
 
