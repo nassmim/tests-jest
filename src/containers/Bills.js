@@ -1,6 +1,7 @@
 import { ROUTES_PATH } from '../constants/routes.js'
 import { formatDate, formatStatus } from "../app/format.js"
 import Logout from "./Logout.js"
+import { orderData } from '../app/generic.js'
 
 export default class {
   constructor({ document, onNavigate, store, localStorage }) {
@@ -34,7 +35,10 @@ export default class {
       .bills()
       .list()
       .then(snapshot => {
-        const bills = snapshot
+
+        const orderedData = orderData({ data: snapshot })
+
+        const bills = orderedData
           .map(doc => {
             try {
               return {

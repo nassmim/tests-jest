@@ -3,7 +3,6 @@ import ErrorPage from "./ErrorPage.js"
 import LoadingPage from "./LoadingPage.js"
 
 import Actions from './Actions.js'
-import { orderData } from '../app/generic.js'
 
 const row = (bill) => {
   return (`
@@ -22,13 +21,8 @@ const row = (bill) => {
 
 
 const rows = (data) => {
-    
     if(!data || !data.length) return ""
-
-    // CORRECTION
-    // La liste de factures est triée de la plus récente à la plus ancienne
-    const orderedBills = orderData({ data })
-    return orderedBills.map(bill => row(bill)).join("")
+    return data.map(bill => row(bill)).join("")
 }
 
 export default ({ data: bills, loading, error }) => {
